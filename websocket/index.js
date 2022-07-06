@@ -19,7 +19,19 @@ const createWSEvents = async io => {
                 // const newUser = userJoin(username, room, socket.id )
                 socket.join(room); // needs a unique identifier for the rooom
 
-    
+    // Wenyu's code trying to make see drawer and guesser
+
+    if(users.length == 1 || typeof io.sockets.adapter.rooms['drawer'] === 'undefined') {
+        socket.join('drawer');
+        console.log(socket.username);
+        io.in(socket.username).emit('drawer', socket.username);
+        console.log(socket.username + ' is a drawer');
+        io.in(socket.username).emit('draw word',getRandomWord());
+    }else{
+        socket.join('guesser');
+        io.in(socket.username).emit('guesser', socket.username);
+        console.log(socket.username + ' is a guesser');
+    }
 
                 socket.emit('message', formatMessage(bot, `Welcome to DÜDLE!`))
 

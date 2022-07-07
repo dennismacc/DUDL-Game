@@ -15,6 +15,8 @@ const messages = {
 const bot = 'DÜDLE Bot';
 const users = {};
 
+let userid = "";
+
 const createWSEvents = async (io) => {
   io.on = promisify(io.on);
   try {
@@ -24,11 +26,13 @@ const createWSEvents = async (io) => {
       socket.emit('message', formatMessage(bot, `Welcome to DÜDL!`));
 
       socket.on('joinRoom', ({ room_name, join_username }) => {
+        // this console log never shows?
         console.log(room_name, join_username);
+        userid = join_username;
         // const newUser = userJoin(username, room, socket.id )
         socket.join(room_name); // needs a unique identifier for the rooom
 
-        //broadcast to all users except for the actual user that joined that a new user has joined
+        //broadcast to all users except for the actual user that joined that a new user has joined/ still not showing right now
         socket.broadcast
           .to(room_name)
           .emit('message', formatMessage(bot, `A user has joined the chat!`));
@@ -40,9 +44,13 @@ const createWSEvents = async (io) => {
 
         socket.broadcast.emit(
           'message',
-          formatMessage((users[socket.id] = message.username), message)
+          formatMessage((userid, message))
         );
       });
+    //   socket.on('SEND_MESSAGE', function(data){
+    //     //Let every user know of the new message
+    //     io.emit('RECEIVE_MESSAGE', data);
+    // });
       //this runs when the user disconnects from the server
       socket.on('disconnect', () => {
         //broadcasting the user to all other users. letting them know that a user has left and there's only that many users left

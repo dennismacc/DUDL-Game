@@ -3,6 +3,8 @@ const chatForm = document.getElementById('chat-form');
 const chatMessages = document.querySelector('.chat-messages');
 //when a user is connected a console log is displaying the user's id.
 
+const wordCorrect = require('../../logic/checkAnswers');
+
 const socket = io();
 socket.io.connect(window.location.hostname);
 // socket.on('New User Connected:', (id) =>
@@ -28,7 +30,16 @@ chatForm?.addEventListener('submit', (e) => {
   console.log(message);
 
   socket.emit('Chat Message', message);
-
+  // trying to determin if it is correct or not
+  
+  if(wordCorrect(message))
+    {
+        socket.emit("Chat Message", "You have guessed correctly! Nice Job!!!!!");
+      
+    }
+  else{
+        socket.emit("Chat Message", "You have gussed wrong! Try Again!");
+  }
   //clear the input
   e.target.elements.msg.value = '';
   e.target.elements.msg.focus();

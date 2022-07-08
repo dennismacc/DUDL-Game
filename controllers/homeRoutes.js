@@ -9,4 +9,20 @@ router.get('/', (req, res) => {
   res.render('home');
 });
 
+router.get('/game/room_name/:roomName', async (req, res) => {
+  try {
+    const roomData = await Room.findByPk(req.params.roomName);
+    //maybe we lookup record from db using roomid
+    console.log(`🧸 User is in game room`);
+
+    // res.json(roomData);
+    res.render('game_room', { roomName: req.params.roomName });
+
+    //render the view game-room.handlebars
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(`ERROR:`, err);
+  }
+});
+
 module.exports = router;

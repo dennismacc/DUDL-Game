@@ -197,6 +197,12 @@ main button {
 }
 /* START OF GAMEROOM STYLING*/
 
+.roomNameCont{
+  position:  relative; 
+  left: -20x; 
+  top: 2px;
+}
+
 /* start of chat box styling */
 header, .project:not(:last-child) {
   border-bottom: 1px solid #ccc;

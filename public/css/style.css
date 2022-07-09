@@ -321,6 +321,7 @@ header,
   height: 110px;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
   display: flex;
   position: absolute;
   top: 15px;
@@ -533,7 +534,7 @@ a {
   background-color: #1565c0;
   width: 60px;
   height: 30px;
-  margin-top: 22px;
+  margin-top: 29px;
   border: none;
   border-radius: 4px;
   color: white;
@@ -600,3 +601,50 @@ a {
   padding-inline-start: 5vw;
   overflow: hidden;
 }
+
+@media only screen and (max-width: 1119px) {
+  .game-room-header {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flex-container > .player-container {
+    order: 3;
+  }
+
+  .flex-container > .drawing-container {
+    order: 1;
+  }
+
+  .flex-container > .chat-container {
+    order: 2;
+  }
+
+  #toolbar {
+    position: static;
+  }
+
+  .drawing-container {
+    align-items: center;
+  }
+
+  #roomName {
+    padding: 10px;
+  }
+
+  .timeDisplay {
+    padding: 10px;
+  }
+
+  .userInfo {
+    padding: 10px;
+  }
+} ;

@@ -10,7 +10,7 @@ const sequelize = process.env.JAWSDB_URL
       {
         host: 'localhost',
         dialect: 'mysql',
-        port: process.env.SQL_PORT || 8889,
+        port: process.env.JAWSDB_URL || 8889,
       }
     );
 
